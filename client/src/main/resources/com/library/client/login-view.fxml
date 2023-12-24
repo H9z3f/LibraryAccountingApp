@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.*?>
+<VBox xmlns:fx="http://javafx.com/fxml/1" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity"
+      minWidth="-Infinity"
+      prefHeight="340.0" prefWidth="300.0" spacing="10.0" xmlns="http://javafx.com/javafx/19"
+      fx:controller="com.library.client.controllers.UserLoginController">
+    <children>
+        <Label alignment="CENTER" prefHeight="20.0" prefWidth="250.0" text="Fill out the form">
+            <font>
+                <Font name="Arial Bold" size="18.0"/>
+            </font>
+        </Label>
+        <Label prefHeight="20.0" prefWidth="250.0" text="Enter email">
+            <font>
+                <Font name="Arial" size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="emailTextField" prefHeight="20.0" prefWidth="250.0" promptText="email">
+            <font>
+                <Font name="Arial" size="14.0"/>
+            </font>
+        </TextField>
+        <Label prefHeight="20.0" prefWidth="250.0" text="Enter password">
+            <font>
+                <Font name="Arial" size="14.0"/>
+            </font>
+        </Label>
+        <TextField fx:id="passwordTextField" prefHeight="20.0" prefWidth="250.0" promptText="password">
+            <font>
+                <Font name="Arial" size="14.0"/>
+            </font>
+        </TextField>
+        <Label fx:id="errorMessageLabel" prefHeight="20.0" prefWidth="250.0" textFill="RED">
+            <font>
+                <Font name="Arial" size="14.0"/>
+            </font>
+        </Label>
+        <HBox alignment="CENTER" prefHeight="20.0" prefWidth="250.0">
+            <children>
+                <Label text="No account yet?">
+                    <font>
+                        <Font name="Arial" size="14.0"/>
+                    </font>
+                </Label>
+                <Hyperlink onAction="#changeWindow" text="Registration">
+                    <font>
+                        <Font name="Arial" size="14.0"/>
+                    </font>
+                </Hyperlink>
+            </children>
+        </HBox>
+        <Button mnemonicParsing="false" onAction="#login" prefHeight="20.0" prefWidth="250.0" text="Login">
+            <font>
+                <Font name="Arial" size="14.0"/>
+            </font>
+            <VBox.margin>
+                <Insets top="25.0"/>
+            </VBox.margin>
+        </Button>
+    </children>
+    <padding>
+        <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+    </padding>
+</VBox>
