@@ -1,13 +1,8 @@
 package com.library.client.dtos;
 
-import java.util.List;
-
 public class User {
-    List<Order> orders;
     private Integer id;
     private String fullName;
-    private String email;
-    private String password;
     private Role role;
 
     public Integer getId() {
@@ -26,35 +21,11 @@ public class User {
         this.fullName = fullName;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
     public Role getRole() {
         return role;
     }
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 }

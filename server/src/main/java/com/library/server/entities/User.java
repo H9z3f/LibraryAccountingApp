@@ -1,16 +1,11 @@
 package com.library.server.entities;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-
-import javax.persistence.*;
-import java.util.List;
+import jakarta.persistence.*;
 
 @Entity
 @Table(name = "users")
 public class User {
-    @OneToMany(mappedBy = "user", fetch = FetchType.EAGER)
-    List<Order> orders;
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -68,13 +63,5 @@ public class User {
 
     public void setRole(Role role) {
         this.role = role;
-    }
-
-    public List<Order> getOrders() {
-        return orders;
-    }
-
-    public void setOrders(List<Order> orders) {
-        this.orders = orders;
     }
 }

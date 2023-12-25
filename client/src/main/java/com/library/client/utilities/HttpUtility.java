@@ -47,6 +47,17 @@ public class HttpUtility {
         return response.body();
     }
 
+    public static String sendPutRequest(String jwt, String url) throws Exception {
+        HttpRequest request = HttpRequest.newBuilder()
+                .uri(new URI(DOMAIN + url))
+                .header("Authorization", "Bearer " + jwt)
+                .header("Content-Type", "application/json")
+                .PUT(HttpRequest.BodyPublishers.noBody())
+                .build();
+        HttpResponse<String> response = HTTP_CLIENT.send(request, HttpResponse.BodyHandlers.ofString());
+        return response.body();
+    }
+
     public static String sendDeleteRequest(String jwt, String url) throws Exception {
         HttpRequest request = HttpRequest.newBuilder()
                 .uri(new URI(DOMAIN + url))

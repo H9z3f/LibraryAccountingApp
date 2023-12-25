@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.library.server.bodies.requests.UserRequestBody;
 import com.library.server.bodies.responses.UserResponseBody;
 import com.library.server.entities.Book;
+import com.library.server.entities.Order;
 import com.library.server.entities.Role;
 import com.library.server.entities.User;
 import com.library.server.utilities.JwtUtility;
@@ -17,7 +18,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.io.IOException;
 import java.net.HttpURLConnection;
-import java.util.ArrayList;
 import java.util.List;
 
 public class UserRegisterHandler implements HttpHandler {
@@ -67,15 +67,18 @@ public class UserRegisterHandler implements HttpHandler {
 
             session.save(user);
 
-            user.setOrders(new ArrayList<>());
-
-            List<Book> books = session.createQuery("from Book where isAvailable = :isAvailable", Book.class)
+            List<Order> orders = session.createQuery("from Order where user = :user order by id", Order.class)
+                    .setParameter("user", user)
+                    .list();
+            List<Book> books = session.createQuery("from Book where isAvailable = :isAvailable order by id", Book.class)
                     .setParameter("isAvailable", true)
                     .list();
 
+            session.getTransaction().commit();
+
             String jwt = JwtUtility.generate(user.getId());
 
-            sendResponse(exchange, HttpURLConnection.HTTP_CREATED, new UserResponseBody(true, jwt, user, books));
+            sendResponse(exchange, HttpURLConnection.HTTP_CREATED, new UserResponseBody(true, jwt, user, books, orders));
         } catch (Exception e) {
             session.getTransaction().rollback();
 

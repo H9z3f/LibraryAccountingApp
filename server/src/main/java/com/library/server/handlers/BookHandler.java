@@ -77,10 +77,10 @@ public class BookHandler implements HttpHandler {
             List<Book> books;
 
             if (user.getRole().getId() == 1) {
-                books = session.createQuery("from Book", Book.class)
+                books = session.createQuery("from Book order by id", Book.class)
                         .list();
             } else {
-                books = session.createQuery("from Book where isAvailable = :isAvailable", Book.class)
+                books = session.createQuery("from Book where isAvailable = :isAvailable order by id", Book.class)
                         .setParameter("isAvailable", true)
                         .list();
             }
@@ -121,6 +121,7 @@ public class BookHandler implements HttpHandler {
             book.setAvailable(true);
 
             session.save(book);
+            session.getTransaction().commit();
 
             sendResponse(exchange, HttpURLConnection.HTTP_CREATED, new BookResponseBody(true, book));
         } catch (Exception e) {
@@ -161,6 +162,7 @@ public class BookHandler implements HttpHandler {
             book.setAvailable(true);
 
             session.update(book);
+            session.getTransaction().commit();
 
             sendResponse(exchange, HttpURLConnection.HTTP_OK, new BookResponseBody(true, book));
         } catch (Exception e) {
@@ -201,6 +203,7 @@ public class BookHandler implements HttpHandler {
             book.setAvailable(false);
 
             session.update(book);
+            session.getTransaction().commit();
 
             sendResponse(exchange, HttpURLConnection.HTTP_OK, new BookResponseBody(true, book));
         } catch (Exception e) {
@@ -224,11 +227,11 @@ public class BookHandler implements HttpHandler {
 
     private Long getParameterId(HttpExchange exchange) {
         String path = exchange.getRequestURI().getPath();
-        if (path.split("/").length != 3 && !isNumber(path.split("/")[3])) {
+        if (path.split("/").length != 3 && !isNumber(path.split("/")[2])) {
             return null;
         }
 
-        return Long.getLong(path.split("/")[3]);
+        return Long.parseLong(path.split("/")[2]);
     }
 
     private boolean isNumber(String parameterId) {

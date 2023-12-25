@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.geometry.Insets?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
@@ -23,12 +24,20 @@
             <children>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <content>
-                        <VBox fx:id="bookListField" prefHeight="440.0" prefWidth="390.0"/>
+                        <VBox fx:id="bookListField" prefHeight="440.0" prefWidth="390.0" spacing="10.0">
+                            <padding>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                            </padding>
+                        </VBox>
                     </content>
                 </ScrollPane>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <content>
-                        <VBox fx:id="orderListField" prefHeight="440.0" prefWidth="390.0"/>
+                        <VBox fx:id="orderListField" prefHeight="440.0" prefWidth="390.0" spacing="10.0">
+                            <padding>
+                                <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
+                            </padding>
+                        </VBox>
                     </content>
                 </ScrollPane>
                 <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="Books" GridPane.rowIndex="1">

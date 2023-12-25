@@ -41,22 +41,22 @@ public class LibraryController {
     }
 
     @FXML
-    void researchBooks(ActionEvent event) {
+    void researchBooks(ActionEvent event) throws Exception {
         libraryModel.researchBooks();
     }
 
     @FXML
-    void researchOrders(ActionEvent event) {
+    void researchOrders(ActionEvent event) throws Exception {
         libraryModel.researchOrders();
     }
 
     @FXML
-    void searchBook(ActionEvent event) {
+    void searchBook(ActionEvent event) throws Exception {
         libraryModel.searchBook();
     }
 
     @FXML
-    void searchOrder(ActionEvent event) {
+    void searchOrder(ActionEvent event) throws Exception {
         libraryModel.searchOrder();
     }
 

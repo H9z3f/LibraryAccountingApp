@@ -1,6 +1,7 @@
 package com.library.client.responses;
 
 import com.library.client.dtos.Book;
+import com.library.client.dtos.Order;
 import com.library.client.dtos.User;
 
 import java.util.List;
@@ -11,6 +12,7 @@ public class UserResponseBody {
     private String jwt;
     private User user;
     private List<Book> books;
+    private List<Order> orders;
 
     public boolean isSuccess() {
         return success;
@@ -50,5 +52,13 @@ public class UserResponseBody {
 
     public void setBooks(List<Book> books) {
         this.books = books;
+    }
+
+    public List<Order> getOrders() {
+        return orders;
+    }
+
+    public void setOrders(List<Order> orders) {
+        this.orders = orders;
     }
 }

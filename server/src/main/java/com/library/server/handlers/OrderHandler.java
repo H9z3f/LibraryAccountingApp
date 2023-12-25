@@ -78,10 +78,10 @@ public class OrderHandler implements HttpHandler {
             List<Order> orders;
 
             if (user.getRole().getId() == 1) {
-                orders = session.createQuery("from Order", Order.class)
+                orders = session.createQuery("from Order order by id", Order.class)
                         .list();
             } else {
-                orders = session.createQuery("from Order where user = :user", Order.class)
+                orders = session.createQuery("from Order where user = :user order by id", Order.class)
                         .setParameter("user", user)
                         .list();
             }
@@ -118,6 +118,13 @@ public class OrderHandler implements HttpHandler {
                 return;
             }
 
+            Status status = session.get(Status.class, 3);
+
+            book.setStatus(status);
+            book.setAvailable(false);
+
+            session.update(book);
+
             Order order = new Order();
             order.setUser(user);
             order.setBook(book);
@@ -125,11 +132,7 @@ public class OrderHandler implements HttpHandler {
             order.setBeenIssued(false);
 
             session.save(order);
-
-            Status status = session.get(Status.class, 3);
-
-            book.setStatus(status);
-            book.setAvailable(false);
+            session.getTransaction().commit();
 
             sendResponse(exchange, HttpURLConnection.HTTP_CREATED, new OrderResponseBody(true, order));
         } catch (Exception e) {
@@ -167,6 +170,7 @@ public class OrderHandler implements HttpHandler {
             order.setReady(true);
 
             session.update(order);
+            session.getTransaction().commit();
 
             sendResponse(exchange, HttpURLConnection.HTTP_OK, new OrderResponseBody(true, order));
         } catch (Exception e) {
@@ -209,9 +213,11 @@ public class OrderHandler implements HttpHandler {
             session.update(book);
 
             order.setBook(book);
+            order.setReady(true);
             order.setBeenIssued(true);
 
             session.update(order);
+            session.getTransaction().commit();
 
             sendResponse(exchange, HttpURLConnection.HTTP_OK, new OrderResponseBody(true, order));
         } catch (Exception e) {
@@ -235,11 +241,11 @@ public class OrderHandler implements HttpHandler {
 
     private Long getParameterId(HttpExchange exchange) {
         String path = exchange.getRequestURI().getPath();
-        if (path.split("/").length != 3 && !isNumber(path.split("/")[3])) {
+        if (path.split("/").length != 3 && !isNumber(path.split("/")[2])) {
             return null;
         }
 
-        return Long.getLong(path.split("/")[3]);
+        return Long.parseLong(path.split("/")[2]);
     }
 
     private boolean isNumber(String parameterId) {
