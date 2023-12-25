@@ -5,6 +5,7 @@ import com.library.client.App;
 import com.library.client.controllers.LibraryController;
 import com.library.client.dtos.Book;
 import com.library.client.dtos.Order;
+import com.library.client.responses.BookResponseBody;
 import com.library.client.responses.MultipleBookResponseBody;
 import com.library.client.responses.MultipleOrderResponseBody;
 import com.library.client.responses.UserResponseBody;
@@ -16,16 +17,18 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Objects;
+import java.util.*;
 
 public class LibraryModel {
     private LibraryController libraryController;
     private Stage stage;
+    private Stage secondaryStage;
     private UserResponseBody userResponseBody;
     private ObjectMapper objectMapper;
 
@@ -135,7 +138,7 @@ public class LibraryModel {
         if (userResponseBody.getUser().getRole().getId() == 1) {
             Button addBookButton = new Button("Add new book");
             addBookButton.setStyle("-fx-font: 14 Arial; -fx-pref-width: 350px;");
-            addBookButton.setOnAction(actionEvent -> addBook());
+            addBookButton.setOnAction(actionEvent -> createBookCreationWindow());
 
             libraryController.getBookListField().getChildren().addAll(addBookButton);
         }
@@ -179,8 +182,66 @@ public class LibraryModel {
         }
     }
 
-    private void addBook() {
+    private void createBookCreationWindow() {
+        secondaryStage = new Stage();
+        secondaryStage.initModality(Modality.APPLICATION_MODAL);
+        secondaryStage.initOwner(stage);
+        secondaryStage.setTitle("Book creation window");
 
+        Label label = new Label("Fill out the form");
+        label.setStyle("-fx-font: bold 18 Arial; -fx-pref-width: 300px; -fx-alignment: center;");
+
+        Label authorLabel = new Label("Enter author:");
+        authorLabel.setStyle("-fx-font: 14 Arial;");
+
+        TextField authorTextField = new TextField();
+        authorTextField.setStyle("-fx-font: 14 Arial; -fx-pref-width: 300px;");
+
+        Label bookNameLabel = new Label("Enter book name:");
+        bookNameLabel.setStyle("-fx-font: 14 Arial;");
+
+        TextField bookNameTextField = new TextField();
+        bookNameTextField.setStyle("-fx-font: 14 Arial; -fx-pref-width: 300px;");
+
+        Label errorLabel = new Label();
+        errorLabel.setStyle("-fx-font: 14 Arial; -fx-text-fill: red;");
+
+        Button submitButton = new Button("Add book");
+        submitButton.setStyle("-fx-font: 14 Arial; -fx-pref-width: 300px;");
+        submitButton.setOnAction(actionEvent -> {
+            try {
+                String url = "/book";
+                Map<String, String> requestBody = new HashMap<>();
+                requestBody.put("author", authorTextField.getText());
+                requestBody.put("bookName", bookNameTextField.getText());
+                String responseBody = HttpUtility.sendPostRequest(ApplicationState.getUserResponseBody().getJwt(), url, requestBody);
+                ObjectMapper objectMapper = new ObjectMapper();
+                BookResponseBody bookResponseBody = objectMapper.readValue(responseBody, BookResponseBody.class);
+
+                if (!bookResponseBody.isSuccess()) {
+                    errorLabel.setText(bookResponseBody.getMessage());
+                    return;
+                }
+
+                destroyBookCreationWindow();
+                researchBooks();
+            } catch (Exception e) {
+                errorLabel.setText(e.getMessage());
+            }
+        });
+
+        VBox dialogVbox = new VBox();
+        dialogVbox.setStyle("-fx-padding: 25px; -fx-spacing: 10px; -fx-pref-width: 350px;");
+        dialogVbox.getChildren().addAll(label, authorLabel, authorTextField, bookNameLabel, bookNameTextField, errorLabel, submitButton);
+
+        Scene dialogScene = new Scene(dialogVbox);
+
+        secondaryStage.setScene(dialogScene);
+        secondaryStage.showAndWait();
+    }
+
+    private void destroyBookCreationWindow() {
+        secondaryStage.close();
     }
 
     private Integer getId(String id) {

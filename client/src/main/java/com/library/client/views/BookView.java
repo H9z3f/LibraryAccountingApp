@@ -48,9 +48,9 @@ public class BookView extends VBox {
             Button archiveButton = new Button("Archive");
             archiveButton.setOnAction(actionEvent -> archiveBook());
 
-            if (book.getStatus().getId() == 1) {
+            if (book.getStatus().getId() != 4) {
                 returnButton.setDisable(true);
-            } else if (book.getStatus().getId() == 4) {
+            } else if (book.getStatus().getId() != 1) {
                 archiveButton.setDisable(true);
             }
 
@@ -93,7 +93,6 @@ public class BookView extends VBox {
             BookResponseBody bookResponseBody = objectMapper.readValue(responseBody, BookResponseBody.class);
 
             if (!bookResponseBody.isSuccess()) {
-                System.out.println(bookResponseBody.getMessage());
                 return;
             }
 
