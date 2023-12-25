@@ -24,7 +24,8 @@
             <children>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.rowIndex="3">
                     <content>
-                        <VBox fx:id="bookListField" prefHeight="440.0" prefWidth="390.0" spacing="10.0">
+                        <VBox fx:id="bookListField" prefHeight="450.0" prefWidth="400.0" spacing="10.0"
+                              style="-fx-background-color: #f5f5dc;">
                             <padding>
                                 <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
                             </padding>
@@ -33,7 +34,8 @@
                 </ScrollPane>
                 <ScrollPane prefHeight="200.0" prefWidth="200.0" GridPane.columnIndex="1" GridPane.rowIndex="3">
                     <content>
-                        <VBox fx:id="orderListField" prefHeight="440.0" prefWidth="390.0" spacing="10.0">
+                        <VBox fx:id="orderListField" prefHeight="450.0" prefWidth="400.0" spacing="10.0"
+                              style="-fx-background-color: #f5f5dc;">
                             <padding>
                                 <Insets bottom="25.0" left="25.0" right="25.0" top="25.0"/>
                             </padding>
@@ -42,25 +44,25 @@
                 </ScrollPane>
                 <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="Books" GridPane.rowIndex="1">
                     <font>
-                        <Font name="Arial" size="14.0"/>
+                        <Font name="Baskerville Old Face" size="16.0"/>
                     </font>
                 </Label>
                 <Label alignment="CENTER" prefHeight="50.0" prefWidth="400.0" text="Orders" GridPane.columnIndex="1"
                        GridPane.rowIndex="1">
                     <font>
-                        <Font name="Arial" size="14.0"/>
+                        <Font name="Baskerville Old Face" size="16.0"/>
                     </font>
                 </Label>
                 <HBox alignment="CENTER" prefHeight="50.0" prefWidth="400.0" spacing="10.0" GridPane.columnIndex="1">
                     <children>
                         <Label fx:id="fullNameField" alignment="CENTER" text="Full name">
                             <font>
-                                <Font name="Arial" size="14.0"/>
+                                <Font name="Baskerville Old Face" size="16.0"/>
                             </font>
                         </Label>
                         <Button alignment="CENTER" mnemonicParsing="false" onAction="#logOut" text="Log out">
                             <font>
-                                <Font name="Arial" size="14.0"/>
+                                <Font name="Baskerville Old Face" size="16.0"/>
                             </font>
                         </Button>
                     </children>
@@ -69,13 +71,13 @@
                     <children>
                         <TextField fx:id="bookIdTextField" prefHeight="50.0" prefWidth="300.0" promptText="Enter id">
                             <font>
-                                <Font name="Arial" size="14.0"/>
+                                <Font name="Baskerville Old Face" size="16.0"/>
                             </font>
                         </TextField>
                         <Button mnemonicParsing="false" onAction="#searchBook" prefHeight="50.0" prefWidth="50.0"
-                                text="▶">
+                                text="🔍">
                             <font>
-                                <Font name="Arial" size="24.0"/>
+                                <Font name="Arial" size="18.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#researchBooks" prefHeight="50.0" prefWidth="50.0"
@@ -90,13 +92,13 @@
                     <children>
                         <TextField fx:id="orderIdTextField" prefHeight="50.0" prefWidth="300.0" promptText="Enter id">
                             <font>
-                                <Font name="Arial" size="14.0"/>
+                                <Font name="Baskerville Old Face" size="16.0"/>
                             </font>
                         </TextField>
                         <Button mnemonicParsing="false" onAction="#searchOrder" prefHeight="50.0" prefWidth="50.0"
-                                text="▶">
+                                text="🔍">
                             <font>
-                                <Font name="Arial" size="24.0"/>
+                                <Font name="Arial" size="18.0"/>
                             </font>
                         </Button>
                         <Button mnemonicParsing="false" onAction="#researchOrders" prefHeight="50.0" prefWidth="50.0"
@@ -110,7 +112,7 @@
                 <Label fx:id="systemRoleField" alignment="CENTER" prefHeight="50.0" prefWidth="400.0"
                        text="System role:">
                     <font>
-                        <Font name="Arial" size="14.0"/>
+                        <Font name="Baskerville Old Face" size="16.0"/>
                     </font>
                 </Label>
             </children>

@@ -78,10 +78,10 @@ public class OrderHandler implements HttpHandler {
             List<Order> orders;
 
             if (user.getRole().getId() == 1) {
-                orders = session.createQuery("from Order order by id", Order.class)
+                orders = session.createQuery("from Order order by id desc", Order.class)
                         .list();
             } else {
-                orders = session.createQuery("from Order where user = :user order by id", Order.class)
+                orders = session.createQuery("from Order where user = :user order by id desc", Order.class)
                         .setParameter("user", user)
                         .list();
             }

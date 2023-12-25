@@ -30,14 +30,22 @@ public class BookView extends VBox {
     }
 
     private void initialize() {
-        this.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-font: 14 Arial; -fx-padding: 10px; -fx-spacing: 5px; -fx-pref-width: 350px;");
+        this.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-font: 16 'Baskerville Old Face'; -fx-padding: 10px; -fx-spacing: 5px; -fx-pref-width: 350px; -fx-background-color: white;");
 
         Label idLabel = new Label("#" + book.getId());
-        idLabel.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        idLabel.setStyle("-fx-underline: true;");
 
         Label authorLabel = new Label("Author: " + book.getAuthor());
         Label titleLabel = new Label("Title: " + book.getBookName());
         Label statusLabel = new Label("Status: " + book.getStatus().getStatusName());
+
+        if (book.getStatus().getId() == 1) {
+            statusLabel.setStyle("-fx-text-fill: green");
+        } else if (book.getStatus().getId() == 2 || book.getStatus().getId() == 3) {
+            statusLabel.setStyle("-fx-text-fill: orange");
+        } else {
+            statusLabel.setStyle("-fx-text-fill: red");
+        }
 
         HBox buttonBox = new HBox();
         buttonBox.setStyle("-fx-spacing: 5px; -fx-pref-width: 330px; -fx-alignment: center-right;");
@@ -48,9 +56,10 @@ public class BookView extends VBox {
             Button archiveButton = new Button("Archive");
             archiveButton.setOnAction(actionEvent -> archiveBook());
 
-            if (book.getStatus().getId() != 4) {
+            if (book.getStatus().getId() == 1 || book.getStatus().getId() == 3) {
                 returnButton.setDisable(true);
-            } else if (book.getStatus().getId() != 1) {
+            }
+            if (book.getStatus().getId() == 3 || book.getStatus().getId() == 4) {
                 archiveButton.setDisable(true);
             }
 

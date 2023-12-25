@@ -74,12 +74,12 @@ public class UserLoginHandler implements HttpHandler {
             List<Book> books;
 
             if (user.getRole().getId() == 1) {
-                orders = session.createQuery("from Order order by id", Order.class)
+                orders = session.createQuery("from Order order by id desc", Order.class)
                         .list();
                 books = session.createQuery("from Book order by id", Book.class)
                         .list();
             } else {
-                orders = session.createQuery("from Order where user = :user order by id", Order.class)
+                orders = session.createQuery("from Order where user = :user order by id desc", Order.class)
                         .setParameter("user", user)
                         .list();
                 books = session.createQuery("from Book where isAvailable = :isAvailable order by id", Book.class)

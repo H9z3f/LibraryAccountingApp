@@ -137,7 +137,7 @@ public class LibraryModel {
 
         if (userResponseBody.getUser().getRole().getId() == 1) {
             Button addBookButton = new Button("Add new book");
-            addBookButton.setStyle("-fx-font: 14 Arial; -fx-pref-width: 350px;");
+            addBookButton.setStyle("-fx-font: 16 'Baskerville Old Face'; -fx-pref-width: 350px;");
             addBookButton.setOnAction(actionEvent -> createBookCreationWindow());
 
             libraryController.getBookListField().getChildren().addAll(addBookButton);
@@ -149,7 +149,7 @@ public class LibraryModel {
 
         if (userResponseBody.getBooks().size() == 0) {
             Label emptyLabel = new Label("List of books is currently empty");
-            emptyLabel.setStyle("-fx-font: 14 Arial; -fx-pref-width: 350px;");
+            emptyLabel.setStyle("-fx-font: 16 'Baskerville Old Face'; -fx-pref-width: 350px;");
 
             libraryController.getBookListField().getChildren().addAll(emptyLabel);
 
@@ -170,7 +170,7 @@ public class LibraryModel {
 
         if (userResponseBody.getOrders().size() == 0) {
             Label emptyLabel = new Label("List of orders is currently empty");
-            emptyLabel.setStyle("-fx-font: 14 Arial; -fx-pref-width: 350px;");
+            emptyLabel.setStyle("-fx-font: 16 'Baskerville Old Face'; -fx-pref-width: 350px;");
 
             libraryController.getOrderListField().getChildren().addAll(emptyLabel);
 
@@ -189,25 +189,25 @@ public class LibraryModel {
         secondaryStage.setTitle("Book creation window");
 
         Label label = new Label("Fill out the form");
-        label.setStyle("-fx-font: bold 18 Arial; -fx-pref-width: 300px; -fx-alignment: center;");
+        label.setStyle("-fx-font: 18 'Baskerville Old Face'; -fx-pref-width: 300px; -fx-alignment: center;");
 
         Label authorLabel = new Label("Enter author:");
-        authorLabel.setStyle("-fx-font: 14 Arial;");
+        authorLabel.setStyle("-fx-font: 16 'Baskerville Old Face';");
 
         TextField authorTextField = new TextField();
-        authorTextField.setStyle("-fx-font: 14 Arial; -fx-pref-width: 300px;");
+        authorTextField.setStyle("-fx-font: 16 'Baskerville Old Face'; -fx-pref-width: 300px;");
 
         Label bookNameLabel = new Label("Enter book name:");
-        bookNameLabel.setStyle("-fx-font: 14 Arial;");
+        bookNameLabel.setStyle("-fx-font: 16 'Baskerville Old Face';");
 
         TextField bookNameTextField = new TextField();
-        bookNameTextField.setStyle("-fx-font: 14 Arial; -fx-pref-width: 300px;");
+        bookNameTextField.setStyle("-fx-font: 16 'Baskerville Old Face'; -fx-pref-width: 300px;");
 
         Label errorLabel = new Label();
-        errorLabel.setStyle("-fx-font: 14 Arial; -fx-text-fill: red;");
+        errorLabel.setStyle("-fx-font: 16 'Baskerville Old Face'; -fx-text-fill: red;");
 
         Button submitButton = new Button("Add book");
-        submitButton.setStyle("-fx-font: 14 Arial; -fx-pref-width: 300px;");
+        submitButton.setStyle("-fx-font: 16 'Baskerville Old Face'; -fx-pref-width: 300px;");
         submitButton.setOnAction(actionEvent -> {
             try {
                 String url = "/book";

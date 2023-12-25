@@ -67,7 +67,7 @@ public class UserRegisterHandler implements HttpHandler {
 
             session.save(user);
 
-            List<Order> orders = session.createQuery("from Order where user = :user order by id", Order.class)
+            List<Order> orders = session.createQuery("from Order where user = :user order by id desc", Order.class)
                     .setParameter("user", user)
                     .list();
             List<Book> books = session.createQuery("from Book where isAvailable = :isAvailable order by id", Book.class)

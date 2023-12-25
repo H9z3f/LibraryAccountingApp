@@ -26,22 +26,24 @@ public class OrderView extends VBox {
     }
 
     private void initialize() {
-        this.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-font: 14 Arial; -fx-padding: 10px; -fx-spacing: 5px; -fx-pref-width: 350px;");
+        this.setStyle("-fx-border-color: black; -fx-border-width: 1px; -fx-font: 16 'Baskerville Old Face'; -fx-padding: 10px; -fx-spacing: 5px; -fx-pref-width: 350px; -fx-background-color: white;");
 
         Label idLabel = new Label("#" + order.getId());
-        idLabel.setStyle("-fx-font-weight: bold; -fx-underline: true;");
+        idLabel.setStyle("-fx-underline: true;");
 
         Label recipientLabel = new Label("Recipient: " + order.getUser().getFullName());
-        Label bookLabel = new Label("Book: " + order.getBook().getBookName());
+        Label bookLabel = new Label("Book: " + order.getBook().getBookName() + " (" + order.getBook().getAuthor() + ")");
 
         Label statusLabel = new Label("Status: Not ready");
-        statusLabel.setStyle("-fx-font-weight: bold;");
+        statusLabel.setStyle("-fx-text-fill: red");
 
         if (order.getReady()) {
             statusLabel.setText("Status: Ready");
+            statusLabel.setStyle("-fx-text-fill: orange");
         }
         if (order.getBeenIssued()) {
             statusLabel.setText("Status: Received");
+            statusLabel.setStyle("-fx-text-fill: green");
         }
 
         this.getChildren().addAll(idLabel, recipientLabel, bookLabel, statusLabel);
